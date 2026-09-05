@@ -273,6 +273,76 @@ export const ModelArchitectureAndMetrics: React.FC<ModelArchitectureAndMetricsPr
         </div>
       </div>
 
+      {/* Section 8.2 Patent Metrics: 5 Core Wound Categories */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-yellow-400 flex items-center gap-2">
+              <Activity className="w-4 h-4 text-indigo-600" />
+              <span>Section 8.2 Benchmark: 5 Core Wound Categories (N = 10,000)</span>
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-yellow-400/80 mt-0.5">
+              Balanced validation corpus with 2,000 clinical samples per category according to patent specification
+            </p>
+          </div>
+          <span className="text-[11px] font-mono text-indigo-600 font-bold bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full border border-indigo-200 dark:border-indigo-800">
+            {LOCAL_BLIP2_LOORA_SIMULATOR.modelName}
+          </span>
+        </div>
+
+        <div className="overflow-x-auto rounded-2xl border border-slate-200">
+          <table className="w-full text-xs text-left">
+            <thead className="bg-slate-50 dark:bg-zinc-800 text-slate-500 dark:text-yellow-400 uppercase font-mono text-[10px] border-b border-slate-200">
+              <tr>
+                <th className="py-3 px-4">Wound Category</th>
+                <th className="py-3 px-4 text-center">Dataset Samples</th>
+                <th className="py-3 px-4 text-center">Precision</th>
+                <th className="py-3 px-4 text-center">Recall</th>
+                <th className="py-3 px-4 text-center">F1-Score</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
+              {RESEARCH_METRICS.map((rm, idx) => (
+                <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
+                  <td className="py-3 px-4 font-semibold text-slate-900 dark:text-yellow-200">
+                    {rm.woundType}
+                  </td>
+                  <td className="py-3 px-4 text-center font-mono text-slate-600">
+                    {rm.datasetSamples.toLocaleString()}
+                  </td>
+                  <td className="py-3 px-4 text-center font-mono font-semibold text-emerald-700 dark:text-emerald-400">
+                    {(rm.precision * 100).toFixed(1)}%
+                  </td>
+                  <td className="py-3 px-4 text-center font-mono font-semibold text-sky-700 dark:text-sky-400">
+                    {(rm.recall * 100).toFixed(1)}%
+                  </td>
+                  <td className="py-3 px-4 text-center font-mono font-bold text-indigo-700 dark:text-indigo-400">
+                    {(rm.f1Score * 100).toFixed(1)}%
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot className="bg-slate-50/80 dark:bg-zinc-800/80 border-t border-slate-200 font-mono text-[11px] font-bold">
+              <tr>
+                <td className="py-2.5 px-4 text-slate-700 dark:text-yellow-300">Macro Average / Total</td>
+                <td className="py-2.5 px-4 text-center text-slate-700 dark:text-yellow-300">
+                  {RESEARCH_METRICS.reduce((acc, curr) => acc + curr.datasetSamples, 0).toLocaleString()}
+                </td>
+                <td className="py-2.5 px-4 text-center text-emerald-700 dark:text-emerald-400">
+                  {(RESEARCH_METRICS.reduce((acc, curr) => acc + curr.precision, 0) / RESEARCH_METRICS.length * 100).toFixed(1)}%
+                </td>
+                <td className="py-2.5 px-4 text-center text-sky-700 dark:text-sky-400">
+                  {(RESEARCH_METRICS.reduce((acc, curr) => acc + curr.recall, 0) / RESEARCH_METRICS.length * 100).toFixed(1)}%
+                </td>
+                <td className="py-2.5 px-4 text-center text-indigo-700 dark:text-indigo-400">
+                  {(RESEARCH_METRICS.reduce((acc, curr) => acc + curr.f1Score, 0) / RESEARCH_METRICS.length * 100).toFixed(1)}%
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
       {/* Dataset & Citation Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
         <div className="p-4 rounded-2xl bg-slate-50 dark:bg-zinc-800 border border-slate-200 space-y-2">
