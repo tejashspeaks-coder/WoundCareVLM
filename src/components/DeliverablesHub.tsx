@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
-import { ShieldAlert, FileText, Award, Download, Copy, Check, Presentation, Video, BookOpen, FileCode, CheckCircle2, Sparkles } from 'lucide-react';
+import { ShieldAlert, FileText, Award, Download, Copy, Check, Presentation, Video, BookOpen, FileCode, CheckCircle2, Sparkles, Database, ExternalLink } from 'lucide-react';
 
 interface DeliverablesHubProps {
   highContrast: boolean;
@@ -9,7 +9,7 @@ interface DeliverablesHubProps {
 
 export const DeliverablesHub: React.FC<DeliverablesHubProps> = ({ highContrast, currentLang = 'en' }) => {
   const [copiedSection, setCopiedSection] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'all' | 'patent' | 'paper' | 'report' | 'deck'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'dataset' | 'patent' | 'paper' | 'report' | 'deck'>('all');
 
   const copyToClipboard = (text: string, sectionKey: string) => {
     navigator.clipboard.writeText(text);
@@ -20,14 +20,17 @@ export const DeliverablesHub: React.FC<DeliverablesHubProps> = ({ highContrast, 
   const dictionary = {
     en: {
       title: 'Academic & Institutional Research Deliverables Hub',
-      subtitle: 'Official IPR Patent Drafts, IEEE Conference Manuscript, Institutional Review Board (IRB) Protocols, and Slide Deck Artifacts.',
+      subtitle: 'Official Clinical Datasets, IPR Patent Drafts, IEEE Conference Manuscript, and Slide Deck Artifacts.',
       tabAll: 'All Documents',
+      tabDataset: 'Open Datasets & Repositories',
       tabPatent: 'IPR Patent Draft',
       tabPaper: 'IEEE Paper Manuscript',
       tabReport: 'Clinical Trial Protocol',
       tabDeck: 'Defense Slide Deck',
       btnCopy: 'Copy Text',
       btnCopied: 'Copied to Clipboard!',
+      datasetTitle: 'Open Medical Wound & Dermatological Datasets',
+      datasetSubtitle: 'Publicly accessible benchmark clinical image databases used in wound vision-language research',
       patentTitle: 'Indian Patent Claim Draft (IPR Cell Submission)',
       patentSubtitle: 'Form-2 Specification • Provisional / Complete Patent Specification',
       paperTitle: 'IEEE Conference Research Manuscript',
@@ -37,14 +40,17 @@ export const DeliverablesHub: React.FC<DeliverablesHubProps> = ({ highContrast, 
     },
     hi: {
       title: 'अकादमिक व पेटेंट अनुसंधान दस्तावेज केंद्र',
-      subtitle: 'आधिकारिक पेटेंट ड्राफ्ट, आईईईई शोध पत्र पांडुलिपि, क्लिनिकल ट्रायल प्रोटोकॉल और प्रस्तुति स्लाइड सामग्री।',
+      subtitle: 'आधिकारिक क्लिनिकल डेटासेट, पेटेंट ड्राफ्ट, आईईईई शोध पत्र पांडुलिपि और प्रस्तुति स्लाइड सामग्री।',
       tabAll: 'सभी दस्तावेज',
+      tabDataset: 'ओपन डेटासेट व लिंक्स',
       tabPatent: 'पेटेंट ड्राफ्ट',
       tabPaper: 'IEEE शोध पत्र',
       tabReport: 'क्लिनिकल ट्रायल रिपोर्ट',
       tabDeck: 'प्रोजेक्ट प्रेजेंटेशन',
       btnCopy: 'कॉपी करें',
       btnCopied: 'कॉपी हो गया!',
+      datasetTitle: 'ओपन मेडिकल घाव व डर्मेटोलॉजी डेटासेट',
+      datasetSubtitle: 'घाव अनुसंधान और विजन-लैंग्वेज मॉडलों के लिए सार्वजनिक रूप से उपलब्ध डेटाबेस',
       patentTitle: 'भारतीय पेटेंट दावा प्रारूप (आईपीआर सेल)',
       patentSubtitle: 'फॉर्म-2 पेटेंट विनिर्देश • मल्टीमॉडल एआई प्राथमिक उपचार प्रणाली',
       paperTitle: 'IEEE शोध सम्मेलन पांडुलिपि',
@@ -54,14 +60,17 @@ export const DeliverablesHub: React.FC<DeliverablesHubProps> = ({ highContrast, 
     },
     ta: {
       title: 'ஆராய்ச்சி மற்றும் காப்புரிமை ஆவண மையம்',
-      subtitle: 'காப்புரிமை வரைவு, IEEE ஆய்வுக் கட்டுரை, மருத்துவ பரிசோதனை நெறிமுறைகள் மற்றும் விளக்கக் காட்சி ஆவணங்கள்.',
+      subtitle: 'மருத்துவ தரவுத்தொகுப்புகள், காப்புரிமை வரைவு, IEEE ஆய்வுக் கட்டுரை மற்றும் விளக்கக் காட்சி ஆவணங்கள்.',
       tabAll: 'அனைத்து ஆவணங்கள்',
+      tabDataset: 'மருத்துவ தரவுத்தொகுப்புகள்',
       tabPatent: 'காப்புரிமை வரைவு',
       tabPaper: 'IEEE ஆய்வுக் கட்டுரை',
       tabReport: 'மருத்துவ சோதனை நெறிமுறை',
       tabDeck: 'திட்ட விளக்கக் காட்சி',
       btnCopy: 'நகலெடு',
       btnCopied: 'நகலெடுக்கப்பட்டது!',
+      datasetTitle: 'திறந்த மருத்துவ காயம் & தோல் தரவுத்தொகுப்புகள்',
+      datasetSubtitle: 'காய ஆராய்ச்சி மற்றும் பார்வை-மொழி மாடல்களுக்கான பொதுத் தரவுத்தளங்கள்',
       patentTitle: 'இந்திய காப்புரிமை வரைவு ஆவணம்',
       patentSubtitle: 'படிவம்-2 காப்புரிமை விவரக்குறிப்பு • கிராமப்புற மருத்துவ AI',
       paperTitle: 'IEEE ஆய்வுக் கட்டுரை கையெழுத்துப் பிரதி',
@@ -136,6 +145,7 @@ KEYWORDS: Vision-Language Model, Medical Triage, Rural Health, LoRA PEFT, Multil
         <div className="flex items-center gap-2 mt-4 overflow-x-auto no-scrollbar">
           {[
             { id: 'all', label: t.tabAll },
+            { id: 'dataset', label: t.tabDataset },
             { id: 'patent', label: t.tabPatent },
             { id: 'paper', label: t.tabPaper },
             { id: 'report', label: t.tabReport },
@@ -155,6 +165,105 @@ KEYWORDS: Vision-Language Model, Medical Triage, Rural Health, LoRA PEFT, Multil
           ))}
         </div>
       </div>
+
+      {/* Document 0: Open Datasets & Repositories */}
+      {(activeTab === 'all' || activeTab === 'dataset') && (
+        <div className="p-5 rounded-2xl border border-slate-200 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Database className="w-4 h-4 text-emerald-600" />
+              <div>
+                <h3 className="font-bold text-sm text-slate-900 dark:text-yellow-300">
+                  {t.datasetTitle}
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-yellow-400/80 mt-0.5">
+                  {t.datasetSubtitle}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+            {[
+              {
+                name: 'Medetec Wound Database',
+                category: 'Chronic & Acute Ulcers, Burns, Surgical',
+                samples: '590+ clinical photos (15 categories)',
+                badge: 'Open Clinical Archive',
+                url: 'http://www.medetec.co.uk/files/medetec-wound-database.html',
+                desc: 'Historic gold-standard clinical photographic database of open wounds, diabetic ulcers, and pressure injuries.'
+              },
+              {
+                name: 'MICCAI FUSeg (Foot Ulcer Segmentation)',
+                category: 'Pixel Ground-Truth Segmentation',
+                samples: '1,210 annotated images (889 patients)',
+                badge: 'MICCAI Benchmark',
+                url: 'https://github.com/uwm-bigdata/wound-segmentation',
+                desc: 'Endorsed by MICCAI, featuring high-resolution clinical wound masks for deep learning benchmarking.'
+              },
+              {
+                name: 'DFU Challenge (Grand Challenge)',
+                category: 'Diabetic Foot Ulcer Detection & Ischemia',
+                samples: '4,000 – 15,680+ multi-site cases',
+                badge: 'Biomedical Challenge',
+                url: 'https://dfu2020.grand-challenge.org/',
+                desc: 'Multimodal diabetic ulcer dataset with annotations for infection risk, localized ischemia, and tissue healing.'
+              },
+              {
+                name: 'Mendeley Data: Lower Limb Wound Dataset',
+                category: '8 Wound Classes + Healthy Controls',
+                samples: '5,443 annotated clinical photos',
+                badge: 'Peer-Reviewed Repository',
+                url: 'https://data.mendeley.com/datasets/cbk88w2g5t/1',
+                desc: 'Comprehensive database spanning lacerations, abrasions, burns, surgical cuts, and diabetic tissue damage.'
+              },
+              {
+                name: 'Kaggle Acute Wound & Trauma Dataset',
+                category: 'Trauma: Punctures, Lacerations, Burns',
+                samples: '430+ categorized injury photos',
+                badge: 'Open Access Dataset',
+                url: 'https://www.kaggle.com/datasets/laurajackson/wound-dataset',
+                desc: 'Real-world labeled triage dataset with annotations for cuts, bruises, burns, punctures, and abrasions.'
+              },
+              {
+                name: 'ISIC Archive (Skin Lesion & Dermatology)',
+                category: 'Dermoscopic & Clinical Skin Lesions',
+                samples: '70,000+ benchmark dermatological images',
+                badge: 'Global Reference Standard',
+                url: 'https://www.isic-archive.com/',
+                desc: 'International open-access dermatological imaging archive used worldwide for clinical vision models.'
+              }
+            ].map((ds, idx) => (
+              <a
+                key={idx}
+                href={ds.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-4 rounded-xl border border-slate-200/90 hover:border-emerald-500/70 bg-slate-50/70 dark:bg-zinc-800/80 hover:bg-emerald-50/20 transition-all flex flex-col justify-between space-y-2.5"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                      {ds.badge}
+                    </span>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 transition-colors" />
+                  </div>
+                  <h4 className="font-bold text-xs text-slate-900 dark:text-yellow-300 mt-2 group-hover:text-emerald-700 transition-colors">
+                    {ds.name}
+                  </h4>
+                  <p className="text-[11px] text-slate-600 dark:text-yellow-400/80 mt-1 leading-relaxed">
+                    {ds.desc}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-200/60 dark:border-zinc-700/60 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                  <span>{ds.samples}</span>
+                  <span className="text-emerald-600 font-semibold group-hover:underline">Open Dataset →</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Document 1: Patent Draft */}
       {(activeTab === 'all' || activeTab === 'patent') && (
